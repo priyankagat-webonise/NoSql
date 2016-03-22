@@ -1,6 +1,6 @@
 1>Create and drop collection
 db.createCollection("profiles", {name:"abc",photo:"a.jpg"});
-db.collection.drop();
+db.profiles.drop();
 
 2>Per page post count.
 db.posts.find({page_id:1}).count();
