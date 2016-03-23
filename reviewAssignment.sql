@@ -16,3 +16,6 @@ db.pages.find({_id:"1"},{posts:{$elemMatch:{"comments._id":"2"}}}).pretty()
 5>pages that are not having posts
 db.pages.find({ posts: { $exists: true, $lte:[0]}}).pretty()
 
+6>find comments before today's date
+ db.pages.find({"posts.comments.comment_time":{$lt:ISODate("2016-04-23")}},{"posts.comments":1}).pretty()
+
