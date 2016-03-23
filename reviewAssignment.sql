@@ -1,13 +1,17 @@
-1>Create and drop collection
-db.createCollection("profiles", {name:"abc",photo:"a.jpg"});
-db.collection.drop();
+1>create collection and drop collection
+db.createCollection("profiles);
+db.profiles.insert({name:"abc",photo:"a.jpg"});
+db.profiles.drop()
 
-2>Per page post count.
-db.posts.find({page_id:1}).count();
+2>number of posts in pages
+db.pages.aggregate({$match:{"_id":"1"}},{$project:{posts:{$size:"$posts"}}})
 
-3>upgdate single comment.
-db.posts.update({post_id:1,"comment.comment_id":3},{$set:{"comment.$.title":"good"}});
+3>change title of comment
+db.pages.update({_id:"1","posts._id":"1","posts.comments._id":"1"},{$set:{"posts.0.comments.0.title":"changed"}})
 
-4>Find in sub document.
-db.posts.find({post_id:2},{comment:{$elemMatch:{comment_id:2}}}).pretty();
+4>find in sub document
+db.pages.find({_id:"1"},{posts:{$elemMatch:{"comments._id":"2"}}}).pretty()
+
+5>pages that are not having posts
+db.pages.find({ posts: { $exists: true, $lte:[0]}}).pretty()
 
