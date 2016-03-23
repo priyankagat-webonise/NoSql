@@ -1,3 +1,4 @@
+
 1>create collection and drop collection
 db.createCollection("profiles);
 db.profiles.insert({name:"abc",photo:"a.jpg"});
